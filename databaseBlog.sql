@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`User` (
   `userID` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(45) NULL,
   `fullname` VARCHAR(60) NULL,
+  `active` TINYINT(1) NULL,
   `profilePictureUrl` LONGTEXT NULL,
   `totalBlog` INT NULL,
   `password` VARCHAR(40) NULL,
@@ -38,12 +39,12 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`PublishedBlog` (
   `blogID` INT NOT NULL AUTO_INCREMENT,
-  `PublishedDay` DATETIME NULL,
+  `publishedDay` DATETIME NULL,
   `numberOfComment` INT NULL,
   `numberOfLike` INT NULL,
   `content` LONGTEXT NULL,
   `imageUrl` LONGTEXT NULL,
-  `Published` TINYINT(1) NULL,
+  `published` TINYINT(1) NULL,
   `lastUpdateDay` DATETIME NULL,
   `userID` INT NOT NULL,
   PRIMARY KEY (`blogID`),
