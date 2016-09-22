@@ -5,11 +5,13 @@ import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
+import DTO.StudentDTO;
 
-public class StudentMapper implements RowMapper<Student>{
+
+public class StudentMapper implements RowMapper<StudentDTO>{
     @Override
-    public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
-        Student student = new Student();
+    public StudentDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+        StudentDTO student = new StudentDTO();
         student.setId(rs.getInt("id"));
         student.setName(rs.getString("name"));
         student.setAge(rs.getInt("age"));

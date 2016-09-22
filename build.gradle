@@ -28,6 +28,8 @@ targetCompatibility = 1.8
 dependencies {
     compile("org.springframework.boot:spring-boot-devtools")
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework:spring-jdbc")
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.6'
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
     testCompile("junit:junit")
 }
