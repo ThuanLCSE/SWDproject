@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PublishedBlog` (
   `blogID` INT NOT NULL AUTO_INCREMENT,
   `publishedDay` DATETIME NULL,
   `numberOfComment` INT NULL,
+  `title` VARCHAR(80) NULL,
   `numberOfLike` INT NULL,
   `content` LONGTEXT NULL,
   `imageUrl` LONGTEXT NULL,
@@ -139,3 +140,31 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `mydb`.`user` (`userID`, `username`, `fullname`, `profilePictureUrl`, `totalBlog`, `password`, `role`, `createDay`) VALUES ('1', 'Ngoc', 'Son Ngoc', '123', '0', '123456', 'admin', '2016/09/09');
+INSERT INTO `mydb`.`user` (`userID`, `username`, `fullname`, `profilePictureUrl`, `totalBlog`, `password`, `role`, `createDay`) VALUES ('2', 'Thuan', 'Minh Thuan', '123', '0', '123456', 'admin', '2016/09/09');
+INSERT INTO `mydb`.`user` (`userID`, `username`, `fullname`, `profilePictureUrl`, `totalBlog`, `password`, `role`, `createDay`) VALUES ('3', 'Quan', 'Ki Quan', '123', '0', '123456', 'admin', '2016/09/09');
+INSERT INTO `mydb`.`user` (`userID`, `username`, `fullname`, `profilePictureUrl`, `totalBlog`, `password`, `role`, `createDay`) VALUES ('4', 'Hung', 'Manh Hung', '123', '0', '123456', 'member', '2016/09/09');
+
+
+INSERT INTO `mydb`.`publishedblog` (`blogID`, `PublishedDay`, `numberOfComment`, `numberOfLike`,`title` , `content`, `imageUrl`, `Published`, `lastUpdateDay`, `userID`) VALUES ('1', '2016/09/09', '0', '0','Long time ago', 'ngay xa xam', '123', '0', '2016/09/09', '1');
+INSERT INTO `mydb`.`publishedblog` (`blogID`, `PublishedDay`, `numberOfComment`, `numberOfLike`,`title`, `content`, `imageUrl`, `Published`, `lastUpdateDay`, `userID`) VALUES ('2', '2016/09/15', '0', '0','My memory', 'nho ki niem xua', '123', '1', '2016/10/13', '2');
+INSERT INTO `mydb`.`publishedblog` (`blogID`, `PublishedDay`, `numberOfComment`, `numberOfLike`,`title`, `content`, `imageUrl`, `Published`, `lastUpdateDay`, `userID`) VALUES ('3', '2016/10/09', '0', '0','Study abroad' ,'Hoc tap tot', '135', '0', '2016/10/11', '4');
+INSERT INTO `mydb`.`publishedblog` (`blogID`, `PublishedDay`, `numberOfComment`, `numberOfLike`,`title`, `content`, `imageUrl`, `Published`, `lastUpdateDay`, `userID`) VALUES ('4', '2016/11/11', '0', '0','Stf off', 'Ki luat tot', '89', '1', '2016/12/03', '3');
+
+
+INSERT INTO `mydb`.`category` (`CategoryID`, `name`) VALUES ('1', 'Thu Vien');
+INSERT INTO `mydb`.`category` (`CategoryID`, `name`) VALUES ('2', 'Truong hoc');
+INSERT INTO `mydb`.`category` (`CategoryID`, `name`) VALUES ('3', 'Lop Hoc');
+INSERT INTO `mydb`.`category` (`CategoryID`, `name`) VALUES ('4', 'Thanh pho');
+
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('1','2','Long time ago');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('1','3','Long time ago');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('1','4','Long time ago');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('2','1','My memory');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('2','4','My memory');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('3','1','Study abroad');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('3','3','Study abroad');
+insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('4','3','Stf off');
+
+
