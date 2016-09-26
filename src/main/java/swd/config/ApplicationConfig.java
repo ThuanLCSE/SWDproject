@@ -4,12 +4,14 @@ import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -22,53 +24,27 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import swd.DAO.BlogDAO;
-import swd.DAO.BlogLikeDAO;
-import swd.DAO.UserDAO;
-import swd.service.BlogService;
-import swd.service.BlogServiceImpl;
-import swd.service.LikeService;
-import swd.service.LikeServiceImpl;
-import swd.service.UserService;
-import swd.service.UserServiceImpl;
+import swd.business.service.BlogService;
+import swd.business.service.BlogServiceImpl;
+import swd.business.service.LikeService;
+import swd.business.service.LikeServiceImpl;
+import swd.business.service.UserService;
+import swd.business.service.UserServiceImpl;
 //
 @Configuration
 @EnableAutoConfiguration
 @EnableWebMvc
-@ComponentScan(basePackages="swd.controller")
+@ComponentScan(basePackages="swd.presentation.controller")
+@EnableJpaRepositories("swd.persistence.DAO")
 public class ApplicationConfig extends WebMvcConfigurerAdapter  {
     
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
         // TODO Auto-generated method stub
         return  application.sources(ApplicationStart.class);
     }
-
-    @Bean(name="blogService")
-    public BlogService blogService(){
-        return new BlogServiceImpl();
-    }
-
-    @Bean(name="likeService")
-    public LikeService likeService(){
-        return new LikeServiceImpl();
-    }
-    @Bean(name="userService")
-    public UserService userService(){
-        return new UserServiceImpl();
-    }
-    @Bean(name="blogDAO")
-    public BlogDAO blogDAO(){
-        return new BlogDAO();
-    }
-
-    @Bean(name="blogLikeDAO")
-    public BlogLikeDAO blogLikeDAO(){
-        return new BlogLikeDAO();
-    }
-    
-    @Bean(name="userDAO")
-    public UserDAO userDAO(){
-        return new UserDAO();
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
     }
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
@@ -94,7 +70,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter  {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
        em.setDataSource(dataSource());
-       em.setPackagesToScan(new String[] { "swd.entity.model" });
+       em.setPackagesToScan(new String[] { "swd.persistence.entity.model" });
   
        JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
        em.setJpaVendorAdapter(vendorAdapter);
