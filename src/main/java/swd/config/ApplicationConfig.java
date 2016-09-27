@@ -20,6 +20,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
@@ -46,11 +47,19 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter  {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/home").setViewName("home");
+        registry.addViewController("/").setViewName("home");
+        registry.addViewController("/welcome").setViewName("home");
+        registry.addViewController("/login").setViewName("login");
+        registry.addViewController("/403").setViewName("403");
+    }
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mydb");
+        driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mydb?useSSL=false");
         driverManagerDataSource.setUsername("root");
         driverManagerDataSource.setPassword("123456");
         

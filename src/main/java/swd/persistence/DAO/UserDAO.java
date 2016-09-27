@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import swd.persistence.entity.model.User;
 @Repository
 @Transactional
-public class UserDAO{
+public class UserDAO implements UserRepository{
     @PersistenceContext
     private EntityManager em;
     

@@ -21,7 +21,7 @@ public class AuthController {
         ModelAndView mv = new ModelAndView();
         boolean authen = userService.getAuthenticated(guest.getUsername(), guest.getPassword());
         if (authen){
-            //create sess
+           
             User authorize = userService.getAuthorized(guest.getUsername());
             session.setAttribute("userId", authorize.getUserID());
             session.setAttribute("role", authorize.getRole());
