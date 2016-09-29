@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import swd.persistence.entity.model.Category;
-import swd.persistence.entity.model.User;
+
 
 
 
