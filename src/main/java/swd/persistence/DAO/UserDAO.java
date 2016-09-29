@@ -73,16 +73,7 @@ public class UserDAO implements UserRepository{
         // TODO Auto-generated method stub
         
     }
-    public boolean delete(int userId) {
-        User user =em.find(User.class, userId);
-        if (user != null){
-            em.remove(user);
-            return true;
-        }
-        return false;
-        // TODO Auto-generated method stub
-        
-    }
+  
     public User getByUsername(String username){
         Query q = em.createQuery("select c from User c where c.username = :username");
         q.setParameter("username", username);

@@ -13,6 +13,7 @@ public interface UserRepository {
     public boolean create(User user);
 
     public boolean deactivate(int userId);
+    
     public User getByUsername(String username);
 
     public List<User> getAll() ;
