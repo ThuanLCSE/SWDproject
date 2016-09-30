@@ -47,7 +47,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PublishedBlog` (
   `imageUrl` LONGTEXT NULL,
   `published` TINYINT(1) NULL,
   `lastUpdateDay` DATETIME NULL,
-  `authorName1` LONGTEXT NULL,
+  `authorName` LONGTEXT NULL,
   `userID` INT NOT NULL,
   PRIMARY KEY (`blogID`),
   INDEX `fk_PublishedBlog_User1_idx` (`userID` ASC),
@@ -171,7 +171,7 @@ UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='1';
 UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='2';
 UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='3';
 UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='4';
-UPDATE `mydb`.`publishedblog` SET `authorName1`='Son Ngoc' WHERE `blogID`='1';
-UPDATE `mydb`.`publishedblog` SET `authorName1`='Minh Thuan' WHERE `blogID`='2';
-UPDATE `mydb`.`publishedblog` SET `authorName1`='Manh Hung' WHERE `blogID`='3';
-UPDATE `mydb`.`publishedblog` SET `authorName1`='Ki Quan' WHERE `blogID`='4';
+UPDATE `mydb`.`publishedblog` SET `authorName`='Son Ngoc' WHERE `blogID`='1';
+UPDATE `mydb`.`publishedblog` SET `authorName`='Minh Thuan' WHERE `blogID`='2';
+UPDATE `mydb`.`publishedblog` SET `authorName`='Manh Hung' WHERE `blogID`='3';
+UPDATE `mydb`.`publishedblog` SET `authorName`='Ki Quan' WHERE `blogID`='4';
