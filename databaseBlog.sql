@@ -47,6 +47,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`PublishedBlog` (
   `imageUrl` LONGTEXT NULL,
   `published` TINYINT(1) NULL,
   `lastUpdateDay` DATETIME NULL,
+  `authorName1` LONGTEXT NULL,
   `userID` INT NOT NULL,
   PRIMARY KEY (`blogID`),
   INDEX `fk_PublishedBlog_User1_idx` (`userID` ASC),
@@ -166,5 +167,11 @@ insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('2','4',
 insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('3','1','Study abroad');
 insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('3','3','Study abroad');
 insert Into `blogcategory` (`CategoryID`, `blogID`,`BlogTitle`) values ('4','3','Stf off');
-
-
+UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='1';
+UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='2';
+UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='3';
+UPDATE `mydb`.`user` SET `active`='1' WHERE `userID`='4';
+UPDATE `mydb`.`publishedblog` SET `authorName1`='Son Ngoc' WHERE `blogID`='1';
+UPDATE `mydb`.`publishedblog` SET `authorName1`='Minh Thuan' WHERE `blogID`='2';
+UPDATE `mydb`.`publishedblog` SET `authorName1`='Manh Hung' WHERE `blogID`='3';
+UPDATE `mydb`.`publishedblog` SET `authorName1`='Ki Quan' WHERE `blogID`='4';
