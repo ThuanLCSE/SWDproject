@@ -4,9 +4,25 @@ import java.util.Properties;
 
 import javax.persistence.EntityManagerFactory;
 
-import org.modelmapper.ModelMapper;
+
+
+
+
+
+
+
+
+
+
+
+import org.springframework.beans.BeansException;
+//import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
+import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,12 +34,19 @@ import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.templateresolver.SpringResourceTemplateResolver;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ITemplateResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import swd.business.service.BlogService;
 import swd.business.service.BlogServiceImpl;
@@ -36,45 +59,42 @@ import swd.business.service.UserServiceImpl;
 @EnableAutoConfiguration
 @EnableWebMvc
 @ComponentScan(basePackages="swd.presentation.controller")
-@EnableJpaRepositories("swd.persistence.DAO")
+//@EnableJpaRepositories("swd.persistence.DAO")
 public class ApplicationConfig extends WebMvcConfigurerAdapter  {
-    
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        // TODO Auto-generated method stub
-        return  application.sources(ApplicationStart.class);
+    @Bean(name ="templateResolver")    
+    public ServletContextTemplateResolver getTemplateResolver() {
+        ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/view/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("XHTML");
+    return templateResolver;
     }
-    @Bean
-    public ModelMapper modelMapper() {
-        return new ModelMapper();
+    @Bean(name ="templateEngine")       
+    public SpringTemplateEngine getTemplateEngine() {
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(getTemplateResolver());
+    return templateEngine;
     }
-    @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/home").setViewName("home");
-        registry.addViewController("/").setViewName("home");
-        registry.addViewController("/welcome").setViewName("home");
-        registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/403").setViewName("403");
+    @Bean(name="viewResolver")
+    public ThymeleafViewResolver getViewResolver(){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver(); 
+        viewResolver.setTemplateEngine(getTemplateEngine());
+    return viewResolver;
     }
+//    @Bean
+//    public ModelMapper modelMapper() {
+//        return new ModelMapper();
+//    } 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
         driverManagerDataSource.setDriverClassName("com.mysql.jdbc.Driver");
         driverManagerDataSource.setUrl("jdbc:mysql://localhost:3306/mydb?useSSL=false");
         driverManagerDataSource.setUsername("root");
-        driverManagerDataSource.setPassword("12345678");
+        driverManagerDataSource.setPassword("123456");
         
         return driverManagerDataSource;
     }
-
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/WEB-INF/view/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
-    }
-
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
@@ -112,6 +132,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter  {
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
     }
+   
 
   
 }
