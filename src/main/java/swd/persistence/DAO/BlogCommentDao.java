@@ -27,6 +27,11 @@ public class BlogCommentDao implements BlogCommentRepository{
 
 	@Override
 	public boolean delete(Blogcomment blogComment) {
+		Blogcomment blc = em.find(Blogcomment.class, blogComment.getId());
+        if (blc != null){
+            em.remove(blogComment);
+            return true;
+            }
 		// TODO Auto-generated method stub
 		return false;
 	}
