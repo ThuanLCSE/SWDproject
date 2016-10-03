@@ -57,7 +57,6 @@ public class UserDAO implements UserRepository{
         return false;
     }
     public boolean create(User user) {
-        
         em.persist(user);
         return true;
     }

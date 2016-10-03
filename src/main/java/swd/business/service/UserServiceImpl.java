@@ -37,6 +37,9 @@ public class UserServiceImpl implements UserService {
             user.setFullname(fullName);
             user.setPassword(password);
             user.setProfilePictureUrl("");
+            System.out.println(user.getFullname());
+
+            System.out.println(user.getUsername());
             userDao.create(user);
             return true;
         }   
