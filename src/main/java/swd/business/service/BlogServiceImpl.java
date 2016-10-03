@@ -39,12 +39,21 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public boolean saveBlog(Publishedblog blog) {
-        
+    	Publishedblog temp= blogDao.getById(blog.getBlogID());
+    	if (temp==null) {
+			blogDao.create(blog);
+			return true;
+		}
         return false;
     }
 
     @Override
     public boolean editBlog(Publishedblog blog) {
+    	Publishedblog temp= blogDao.getById(blog.getBlogID());
+    	if (temp!=null) {
+			blogDao.edit(blog.getBlogID(), blog);
+			return true;
+		}
         // TODO Auto-generated method stub
         return false;
     }
@@ -63,6 +72,12 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public boolean deleteBlogById(int blogId) {
+    	Publishedblog blog = blogDao.getById(blogId);
+    	if (blog!=null) {
+			blogDao.removeBLog(blogId);
+			return true;
+		}
+    	
         // TODO Auto-generated method stub
         return false;
     }
