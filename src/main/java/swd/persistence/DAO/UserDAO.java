@@ -91,5 +91,14 @@ public class UserDAO implements UserRepository{
         List<User> users = em.createQuery("Select a From User a", User.class).getResultList();
         return users;
     }
+
+    @Override
+    public User getById(int userId) {
+        User user =em.find(User.class, userId);
+        if (user != null){ 
+            return user;
+        } else 
+        return null;
+    }
     
 }

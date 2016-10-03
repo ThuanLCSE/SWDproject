@@ -54,5 +54,12 @@ public class BlogDAO implements BlogRepository{
         }
         return false;
     }
+    @Override
+    public Publishedblog getById(int blogId) {
+        Publishedblog blog =  em.find(Publishedblog.class, blogId);
+        if (blog != null) 
+            return blog;
+        return null;
+    }
 
 }

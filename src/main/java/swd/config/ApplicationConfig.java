@@ -15,6 +15,9 @@ import javax.persistence.EntityManagerFactory;
 
 
 
+
+
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeansException;
 //import org.modelmapper.ModelMapper;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -37,6 +40,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -81,10 +85,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter  {
         viewResolver.setTemplateEngine(getTemplateEngine());
     return viewResolver;
     }
-//    @Bean
-//    public ModelMapper modelMapper() {
-//        return new ModelMapper();
-//    } 
+    @Bean
+    public ModelMapper modelMapper() {
+        return new ModelMapper();
+    } 
     @Bean(name = "dataSource")
     public DriverManagerDataSource dataSource() {
         DriverManagerDataSource driverManagerDataSource = new DriverManagerDataSource();
@@ -127,7 +131,10 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter  {
        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
        return properties;
     }
-    
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
+    }
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();

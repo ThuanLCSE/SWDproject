@@ -9,7 +9,7 @@
 	<h2>Welcome to system <p th:text="${session.fullname}"></p></h2>
   <p th:text="${session.userId}"></p>
     <p th:text="${session.role}"></p>
-	<form action="/listBlog" method="get">
+	<form action="/blogs" method="get">
 		<input type="submit" value="View all Blogs" />
 	</form>
 
@@ -26,10 +26,6 @@
 	<form th:action="@{/logout}" method="POST">
          <input type="submit" value="Log out"/>
     </form>
-
-	<form action="/listBlog" method="post">
-		Category <input type="submit" value="Search" />
-	</form>
 
 
 </body>

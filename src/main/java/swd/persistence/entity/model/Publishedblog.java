@@ -36,7 +36,7 @@ public class Publishedblog implements Serializable {
 	private Date publishedDay;
 
 	private String title;
-
+	private String authorName;
 	private int userID;
 
 	public Publishedblog() {
@@ -121,5 +121,13 @@ public class Publishedblog implements Serializable {
 	public void setUserID(int userID) {
 		this.userID = userID;
 	}
+
+    public String getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
 
 }

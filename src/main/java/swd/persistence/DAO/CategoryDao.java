@@ -40,7 +40,7 @@ public class CategoryDao implements CategoryRepository{
 		em.persist(Category);
 		return true;
 	}
-    public boolean delete(int CategoryID) {
+    public boolean deleteById(int CategoryID) {
         Category catagory =em.find(Category.class, CategoryID);
         if (catagory != null){
             em.remove(catagory);
@@ -54,15 +54,21 @@ public class CategoryDao implements CategoryRepository{
         List<Category> catagory = em.createQuery("Select a From Category a", Category.class).getResultList();
         return catagory;
     }
+//
+//	@Override
+//	public boolean updateInfo(Category category) {
+//		
+//		if (em.find(Category.class, category.getCategoryID())!=null){
+//            em.merge(category);
+//            return true;
+//        }
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
-	@Override
-	public boolean updateInfo(Category category) {
-		
-		if (em.find(Category.class, category.getCategoryID())!=null){
-            em.merge(category);
-            return true;
-        }
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public Category getById(int categoryId) {
+        Category category =em.find(Category.class, categoryId);
+        return category;
+    }
 }

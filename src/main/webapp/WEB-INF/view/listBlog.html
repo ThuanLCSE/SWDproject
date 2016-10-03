@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>My blog</title>
+</head>
+<body>
+    <h4>Welcome to system <p th:text="${session.fullname}"></p></h4>
+    
+    <form action="/listBlog" method="post">
+    Search blog 
+        <input type="text" name="searchText"/> 
+    In category 
+        <select name="category" >
+            <option th:each="cat : ${categories}" 
+                        th:value="${cat.categoryID}" th:text="${cat.name}">cat name</option> 
+        </select>
+        <input type="submit" value="Search" />
+    </form>
+    
+    <table border="1">
+        <tr>
+            <th>Picture</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Content</th>
+            <th>Last update day</th>
+            <th>Like</th>
+            <th>Comment</th>
+        </tr>
+        <tr th:each="blog : ${blogs}">
+          <td th:text="${blog.imageUrl}"></td>
+          <td th:text="${blog.title}"></td>
+          <td th:text="${blog.authorName}"></td>
+          <td th:text="${blog.content}"></td>
+          <td th:text="${blog.lastUpdateDay}"></td>
+          
+          <td th:text="${blog.numberOfComment}"></td>
+          <td th:text="${blog.numberOfLike}"></td>
+          <td ></td>
+        </tr>
+    </table>
+    <a href="/home">Back to home</a>
+     
+</body>
+</html>
+

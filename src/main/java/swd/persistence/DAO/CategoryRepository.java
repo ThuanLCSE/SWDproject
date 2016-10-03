@@ -8,11 +8,11 @@ import swd.persistence.entity.model.Category;
 public interface CategoryRepository {
 
 	public boolean CategoryExist(String categoryName);
-
+	
 	public boolean create(Category Category);
-	public boolean updateInfo(Category category);
+	public Category getById(int categoryId);
 
-	public boolean delete(int CategoryID);
+	public boolean deleteById(int CategoryID);
 
 	public List<Category> getAll();
 }

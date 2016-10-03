@@ -14,7 +14,10 @@ import swd.persistence.entity.model.User;
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserDAO userDao;
-  
+    public User getUserById(int userId){
+        User us = userDao.getById(userId);
+        return us;
+    }
     public void setUserDAO(UserDAO userDAO){
         this.userDao = userDAO;
     }
