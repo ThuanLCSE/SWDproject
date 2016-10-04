@@ -10,7 +10,7 @@ public interface BlogService {
     public Publishedblog findById(int blogId);
     public boolean saveAsDraft(Publishedblog blog);
     public boolean publishBlogById(int blogId);
-    public boolean saveBlog(Publishedblog blog);
+    public boolean saveBlog(String title, String picture, String content);
     public boolean editBlog(Publishedblog blog);
     public boolean updateCommentById(int blogId, int commentAmount);
     public boolean updateLiketById(int blogId, int likeAmount);
