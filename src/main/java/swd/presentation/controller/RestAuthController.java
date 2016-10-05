@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.mysql.fabric.Response;
+
 import swd.business.service.BlogService;
 import swd.business.service.UserService;
 import swd.persistence.entity.model.Publishedblog;
@@ -33,9 +35,11 @@ public class RestAuthController {
         } else {
             User userEnt = userService.getAuthorized(username);
             err.setType(200);
-            err.setMessage(userEnt.getUserID()+"");
+            err.setMessage(userEnt.getUserID()+":"+userEnt.getRole()+":"+userEnt.getFullname());
         }
         System.out.println(err.toString());
         return err;
     }
+   
+    
 }

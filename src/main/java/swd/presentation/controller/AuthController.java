@@ -1,6 +1,9 @@
 package swd.presentation.controller;
 
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +26,7 @@ import swd.persistence.entity.model.User;
 
 @Controller
 public class AuthController {
+    
     @Autowired
     private UserService userService;
  
@@ -52,8 +56,7 @@ public class AuthController {
         return "home";
     }
     @RequestMapping(value ="/signup", method = RequestMethod.GET)
-    public String signup(){
-        System.out.println("sign up page");
+    public String signup(){ 
         return "signup";
     }
 
@@ -61,16 +64,42 @@ public class AuthController {
     public String signupPos(Model model, @RequestParam String username,
             @RequestParam String password,
             @RequestParam String fullname,
+            @RequestParam String confirmPassword,
             HttpServletRequest request
             ){
-        boolean result =  userService.signUp(username, password, fullname);
-        if (!result){
-            return "signup";
-        } 
-        
-        authenticateUserAndSetSession(username, password, request);
-
-        return "redirect:/home/";
+        StringBuilder urlErrParam = new StringBuilder("?");
+        Pattern p = Pattern.compile(UserService.regExPatternUsername);
+        Matcher m = p.matcher(username);   
+        if (!m.find() || username.compareTo(m.group(0)) != 0){
+            urlErrParam.append("usn&");
+        }
+        p = Pattern.compile(UserService.regExPatternPassword);
+        m = p.matcher(password);   
+        if (!m.find() || password.compareTo(m.group(0)) != 0){
+            urlErrParam.append("pas&");
+        }
+        if ( password.compareTo(confirmPassword) != 0){
+            urlErrParam.append("cfp&");
+        }
+        p = Pattern.compile(UserService.regExPatternFullname);
+        m = p.matcher(fullname);   
+        if (!m.find() || fullname.compareTo(m.group(0)) != 0){
+            urlErrParam.append("fln&");
+        }
+        urlErrParam.deleteCharAt(urlErrParam.length()-1);
+         
+        if (urlErrParam.length() == 0){
+            boolean result =  userService.signUp(username, password, fullname);
+            if (!result){
+                return "signup?ext";
+            } else { 
+                authenticateUserAndSetSession(username, password, request); 
+                return "redirect:/home/";
+            }
+        } else {
+            return "redirect:/signup"+urlErrParam;
+        }
+      
     }
 
     private void authenticateUserAndSetSession(String username, String password, HttpServletRequest request) {

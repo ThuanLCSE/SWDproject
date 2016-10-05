@@ -8,9 +8,24 @@
   <body>
      <form th:action="@{/signup}" method="post">
             <div><label> User Name : <input type="text" name="username"/> </label></div>
+             <div th:if="${param.usn}">
+                Username from 6-40 characters
+            </div>
+              <div th:if="${param.ext}">
+                Username exist!!!
+            </div>
             <div><label> Password: <input type="password" name="password"/> </label></div>
+             <div th:if="${param.pas}">
+                Password from 6-40 characters
+            </div>
             <div><label> Retype Password: <input type="password" name="confirmPassword"/> </label></div>
+             <div th:if="${param.cfp}">
+                Password confirm not valid
+            </div>
             <div><label> Full name: <input type="text" name="fullname"/> </label></div>
+             <div th:if="${param.fln}">
+                 Fullname from 4-60 characters
+              </div>
             <div><input type="submit" value="Sign In"/></div>
         </form>
         <a href="/login">I have an account already</a>

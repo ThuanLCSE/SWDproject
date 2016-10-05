@@ -26,7 +26,8 @@ public class RestBlogController {
     @Autowired
     private BlogService blogService;
     @RequestMapping("/detail/{blogId}")
-    public BlogDTO greeting( @PathVariable int blogId) {
+    public BlogDTO detail(@RequestBody String accessToken, @PathVariable int blogId) {
+        System.out.println(accessToken);
         Publishedblog blogEnt =  blogService.findById(blogId);
         BlogDTO blogDto = blogService.convertToDTO(blogEnt);
         return  blogDto;
@@ -36,6 +37,7 @@ public class RestBlogController {
          if (accessToken == null){
              return null;
          } else {
+             System.out.println(accessToken);
              List<Publishedblog> blogEnts= blogService.showAll();
              List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
              for (Publishedblog blogEnt: blogEnts){
@@ -51,6 +53,7 @@ public class RestBlogController {
          if (accessToken == null){
              return false;
          } else {
+             System.out.println(accessToken);
              Publishedblog blogEnt = blogService.convertToEnt(blogDto);
              boolean result = blogService.saveBlog(blogEnt);
              System.out.println(blogEnt);
