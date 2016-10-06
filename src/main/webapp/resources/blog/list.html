@@ -1,0 +1,25 @@
+<div ng-init="showAllBlog()">
+<table class="table-bordered">
+    <tr>
+      <td>Image </td>
+      <td>Title</td>
+      <td>Author</td>
+      <td>Content</td>
+      <td>Last update</td>
+      
+      <td>Comment</td>
+      <td>Like</td>
+  </tr>
+  <tr ng-click="viewDetailBlog($index)" ng-repeat="blog in blogs | orderBy : 'lastUpdateDay'">
+      <td>{{blog.imageUrl}}</td>
+      <td>{{blog.title}}</td>
+      <td>{{blog.authorName}}</td>
+      <td>{{blog.content}}</td>
+      <td>{{blog.lastUpdateDay}}</td>
+      
+      <td>{{blog.numberOfComment}}</td>
+      <td>{{blog.numberOfLike}}</td>
+  </tr>
+</table>
+<button ng-click="createBlog()" type="button" class="btn btn-lg btn-primary" >Create new Blog</button>
+</div>

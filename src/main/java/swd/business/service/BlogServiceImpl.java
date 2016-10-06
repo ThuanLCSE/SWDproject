@@ -115,6 +115,24 @@ public class BlogServiceImpl implements BlogService{
 		return false;
 	}
 
+    @Override
+    public boolean saveBlogByDto(Publishedblog blog) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public List<Publishedblog> showAllByUserId(int userId) {
+        List<Publishedblog> temp =blogDao.getAll();
+        for (Publishedblog blog : temp){
+            if (blog.getUserID() != userId){
+                temp.remove(blog);
+            }
+        }
+        return temp;
+        
+    }
+
 	
   
 }

@@ -1,0 +1,27 @@
+<form>
+        <div class="form-group ">
+            <label for="title"  >
+                Title
+            </label>
+            <input type="text" data-ng-model="blogDto.title" class="form-control" name="title" required/>
+        </div>
+        <div class="form-group ">
+            <label for="content"  >
+                Content
+            </label>
+            <textarea data-ng-model="blogDto.content" name="content" required  class="form-control" ></textarea>
+        </div>
+         <div class="form-group ">
+            <label for="imageUrl"  >
+                Image url
+            </label>
+            <input type="text" data-ng-model="blogDto.imageUrl" class="form-control" name="imageUrl"/>
+        </div>
+        <div class="form-group ">
+            <input type="submit" class="btn btn-lg btn-primary" value="Save"/>
+        </div>
+         <div class="form-group ">
+            <button type="button" ng-click="postBlog()" class="btn btn-lg btn-primary" >Post</button>
+             <button type="button" ng-click="saveDraftBlog()" class="btn btn-lg btn-primary" >Save as Draft</button>
+        </div> 
+    </form>

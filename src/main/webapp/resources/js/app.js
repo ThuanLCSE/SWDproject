@@ -1,3 +1,7 @@
 'use strict';
- 
-var App = angular.module('myApp',[]);
+
+var mainApplicationModuleName = 'myApp';
+
+var mainApplicationModule = angular.module(mainApplicationModuleName, 
+	['ngResource', 'ngRoute', 'blog']);
+angular.module('blog', []);

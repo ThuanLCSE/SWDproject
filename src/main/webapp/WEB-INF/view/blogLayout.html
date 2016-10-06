@@ -1,17 +1,23 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>My blog</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css"></link>
+ <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css"></link>
+ 
 </head>
 <body ng-app="myApp" >
-   
+  <section ng-controller="BlogController" >
+  
+    <ng-include src="blogView.url"></ng-include>
+   </section> 
     <a href="/home">Back to home</a>
-        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
-      <script src="<c:url value='/static/js/app.js' />"></script>
-      <script src="<c:url value='/static/js/service/user_service.js' />"></script>
-      <script src="<c:url value='/static/js/controller/user_controller.js' />"></script>
+        <script src="/resources/js/lib/angular.min.js"></script>
+         <script src="/resources/js/lib/angular-resource.js"></script>
+         <script src="/resources/js/lib/angular-route.js"></script>
+      <script src="/resources/js/app.js"></script>
+      <script src="/resources/js/service/blog_service.js"></script>
+      <script src="/resources/js/controller/blog_controller.js"></script>
 </body>
-</html>
-
+</html> 

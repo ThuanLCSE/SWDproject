@@ -29,15 +29,17 @@ import swd.presentation.DTO.CategoryDTO;
 public class BlogController {
 
  
-	@Autowired
-    private UserDAO UserDAO;
+    @Autowired
+    private UserService userService;
     @Autowired
     private BlogService blogService;
     @Autowired
     private CategoryService catService;
-    
+    /**
+     * view all
+     */
     @RequestMapping(value={"/blogs"}, method = RequestMethod.GET)
-    public ModelAndView homePage() {
+    public ModelAndView viewAllBlog() {
         ModelAndView mv= new ModelAndView();
         List<Publishedblog> blogEnts= blogService.showAll();
         List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
@@ -57,32 +59,27 @@ public class BlogController {
         mv.setViewName("listBlog");
         return mv;
     }
+    /**
+     * view my blog
+     */
     @RequestMapping(value={"/listBlog"}, method = RequestMethod.GET)
-    public ModelAndView Page() {
+    public ModelAndView viewMyBlog() {
     	org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	String username = user.getUsername();  
-        User us = UserDAO.getByUsername(username);  
+        User us = userService.getAuthorized(username);  
         
         ModelAndView mv= new ModelAndView();
-        List<Publishedblog> blogEnts= blogService.showAll();
+        List<Publishedblog> blogEnts= blogService.showAllByUserId(us.getUserID());
         List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
-        for (Publishedblog blogEnt: blogEnts){
-        	if (blogEnt.getUserID()==us.getUserID()){
+        for (Publishedblog blogEnt: blogEnts){ 
         	BlogDTO blogDTO = blogService.convertToDTO(blogEnt);
-            
             	blogDTOs.add(blogDTO);
-        	}
-            
         }
         List<Category> catEnts = catService.showAll();
         List<CategoryDTO> catDTOs = new ArrayList<CategoryDTO>();
-        for (Category catEnt: catEnts){
-            
-          
+        for (Category catEnt: catEnts){ 
             	CategoryDTO catDto = catService.convertToDTO(catEnt);
-            	catDTOs.add(catDto);
-			
-            
+            	catDTOs.add(catDto); 
         }
         System.out.println(catDTOs);
         mv.addObject("categories", catDTOs);
@@ -92,8 +89,7 @@ public class BlogController {
     }
   
     @RequestMapping(value ="/CreateBlog", method = RequestMethod.GET)
-    public String signup(){
-        System.out.println("sign up page");
+    public String createBlogg(){ 
         return "CreateBlog";
     }
     @RequestMapping(value={"/CreateBlog"}, method = RequestMethod.POST)
@@ -102,5 +98,9 @@ public class BlogController {
     	blogService.saveBlog(title, picture, content);
     	return "redirect:/listBlog/";
     }
-  
+     @RequestMapping(value={"/blogApp"}, method = RequestMethod.GET)
+        public String appBlog() {
+            return "blogLayout";
+        }
+      
 }
