@@ -2,9 +2,11 @@
 <div> Title: {{blogDetail.title}} </div>
 <div> Content: {{blogDetail.content}} </div> 
 <div> Image: {{blogDetail.imageUrl}} </div>
-<div> Last UpdateDay: {{blogDetail.lastUpdateDay}} </div>
+<div> Last UpdateDay: {{blogDetail.lastUpdateDay| date:"MM/dd/yyyy"}}</div>
 <div> Comment: {{blogDetail.numberOfComment}} </div>
  <div> Like: {{blogDetail.numberOfLike}} </div>
- <div> Published Day: {{blogDetail.publishedDay}} </div>
+ <div> Published Day: {{blogDetail.publishedDay| date:"MM/dd/yyyy"}} </div>
  <div> Author : {{blogDetail.authorName}} </div>
+  <button ng-click="commentBlog()">Edit </button>
+   <button ng-click="commentBlog()">Comment</button>
  <button ng-click="commentBlog()">Comment</button>

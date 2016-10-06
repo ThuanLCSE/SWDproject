@@ -1,19 +1,27 @@
-<form>
+<form name="createBlog">
         <div class="form-group ">
             <label for="title"  >
                 Title
             </label>
-            <input type="text" data-ng-model="blogDto.title" class="form-control" name="title" required/>
+            <input type="text" data-ng-model="blogDto.title" class="form-control" name="title" 
+            ng-pattern="/.{5,50}$/i" required/>
+            <span class="error" ng-show="!createBlog.title.$valid && createBlog.title.$dirty">
+                Title must be 5 - 50 characters
+            </span>
         </div>
         <div class="form-group ">
             <label for="content"  >
                 Content
             </label>
-            <textarea data-ng-model="blogDto.content" name="content" required  class="form-control" ></textarea>
+            <textarea data-ng-model="blogDto.content" name="content" ng-pattern="/.{1,  }$/i" 
+            required  class="form-control" ></textarea>
+             <span class="error" ng-show="!createBlog.content.$valid && createBlog.content.$dirty">
+                Content can not empty
+            </span>
         </div>
          <div class="form-group ">
             <label for="imageUrl"  >
-                Image url
+                Image url (picture url)
             </label>
             <input type="text" data-ng-model="blogDto.imageUrl" class="form-control" name="imageUrl"/>
         </div>
@@ -23,3 +31,5 @@
              <button type="button" ng-click="saveDraftBlog()" class="btn btn-primary" >Save as Draft</button>
         </div> 
     </form>
+    <button  class="btn  btn-primary"  ng-click="showAllBlog()">Back to list</button>
+ 

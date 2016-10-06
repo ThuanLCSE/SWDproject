@@ -25,14 +25,25 @@ public class BlogServiceImpl implements BlogService{
     private UserDAO UserDAO;
     @Override
     public List<Publishedblog> showAll() {
-        
-        return blogDao.getAll();
+        List<Publishedblog> blogs = blogDao.getAll();
+        for (int i=0;i<blogs.size();i++){
+            if (blogs.get(i).getPublished() == 0){
+                blogs.remove(i);
+            }
+        }
+        return blogs;
     }
 
     @Override
     public boolean saveAsDraft(Publishedblog blog) {
-        // TODO Auto-generated method stub
-        return false;
+        Publishedblog publishedblog = blog;
+        publishedblog.setLastUpdateDay(new Date());
+        publishedblog.setNumberOfComment(0);
+        publishedblog.setNumberOfLike(0);
+        publishedblog.setPublished((byte)0);
+        publishedblog.setPublishedDay(new Date()); 
+        boolean result = blogDao.create(publishedblog);
+        return result;
     }
     
 
@@ -131,9 +142,9 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public List<Publishedblog> showAllByUserId(int userId) {
         List<Publishedblog> temp =blogDao.getAll();
-        for (Publishedblog blog : temp){
-            if (blog.getUserID() != userId){
-                temp.remove(blog);
+        for (int i=0;i<temp.size();i++){
+            if (temp.get(i).getUserID() != userId){
+                temp.remove(i);
             }
         }
         return temp;

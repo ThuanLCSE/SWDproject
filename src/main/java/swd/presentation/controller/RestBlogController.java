@@ -43,8 +43,7 @@ public class RestBlogController {
              for (Publishedblog blogEnt: blogEnts){
                  BlogDTO blogDTO = blogService.convertToDTO(blogEnt);
                  blogDTOs.add(blogDTO);
-             } 
-             System.out.println(blogDTOs.get(0));
+             }  
             return  blogDTOs;
  
     }
@@ -64,15 +63,24 @@ public class RestBlogController {
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public  boolean create(@RequestBody BlogDTO blogDto,HttpSession session) {
        
-             System.out.println("DTO VE: " +blogDto.toString()); 
              Publishedblog blogEnt = blogService.convertToEnt(blogDto); 
              blogEnt.setAuthorName((String) session.getAttribute("fullname"));
              blogEnt.setUserID(Integer.parseInt((String) session.getAttribute("userId")));
-             boolean result = blogService.saveBlogByDto(blogEnt);
-          
+             boolean result = blogService.saveBlogByDto(blogEnt); 
             return  result; 
          
     }
+    @RequestMapping(value = "/create/draft", method = RequestMethod.POST)
+    public  boolean saveDraft(@RequestBody BlogDTO blogDto,HttpSession session) {
+       
+             Publishedblog blogEnt = blogService.convertToEnt(blogDto); 
+             blogEnt.setAuthorName((String) session.getAttribute("fullname"));
+             blogEnt.setUserID(Integer.parseInt((String) session.getAttribute("userId")));
+             boolean result = blogService.saveAsDraft(blogEnt); 
+            return  result; 
+         
+    }
+    
     @RequestMapping(value = "/edit/{blogId}", method = RequestMethod.POST)
     public  boolean editById(@RequestBody BlogDTO blogDto,HttpSession session, @PathVariable int blogId) {
             System.out.println(blogDto);

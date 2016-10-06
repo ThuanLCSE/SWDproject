@@ -57,11 +57,9 @@ public class RestAuthController {
      
     }
     @RequestMapping(value="/edit/{userId}",method = RequestMethod.POST)
-    public UserDTO editProfile(@PathVariable int userId, @RequestBody UserDTO userDto) { 
-        User userEnt = userService.u; 
-        UserDTO userDto = userService.convertToDTO(userEnt);
-        System.out.println(userDto.toString());
-        return userDto;
+    public boolean editProfile(@PathVariable int userId, @RequestBody UserDTO userDto) { 
+        boolean result = userService.editUserById(userId, userService.convertToEnt(userDto));  
+        return result;
      
     }
    

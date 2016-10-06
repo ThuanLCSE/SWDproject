@@ -9,6 +9,7 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
 				imageUrl: ''
 		};
 		$scope.showAllBlog = function(){
+			$scope.blogView.url = 'resources/blog/list.html';
 			BlogService.showAll({
 		                action: 'all'
 	      },null
@@ -20,6 +21,7 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
             });
 		};
 		$scope.showMyBlog = function(){
+			$scope.blogView.url = 'resources/blog/list.html';
 			BlogService.showMyBlog({
 		                action: 'all'
 	      },null
@@ -51,6 +53,17 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
 			 
 			BlogService.saveBlog({
                 action: 'create'
+			  },$scope.blogDto 
+			  , function(response) {
+				  $scope.blogView.url = 'resources/blog/list.html';
+				  $scope.showMyBlog(); 
+			    }, function(errorResponse) {
+			    	 console.log(errorResponse);
+			    });
+		};
+		$scope.saveDraftBlog = function(){
+			BlogService.saveDraftBlog({
+                action: 'create/draft'
 			  },$scope.blogDto 
 			  , function(response) {
 				  $scope.blogView.url = 'resources/blog/list.html';
