@@ -111,14 +111,21 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public boolean editBlog(Publishedblog blog) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result=  blogDao.edit(blog.getBlogID(), blog);
+	    
+		return result;
 	}
 
     @Override
     public boolean saveBlogByDto(Publishedblog blog) {
-        // TODO Auto-generated method stub
-        return false;
+        Publishedblog publishedblog = blog;
+        publishedblog.setLastUpdateDay(new Date());
+        publishedblog.setNumberOfComment(0);
+        publishedblog.setNumberOfLike(0);
+        publishedblog.setPublished((byte)1);
+        publishedblog.setPublishedDay(new Date()); 
+        boolean result = blogDao.create(publishedblog);
+        return result;
     }
 
     @Override

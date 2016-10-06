@@ -2,16 +2,21 @@ package swd.business.service;
 import java.util.Date;
 import java.util.List;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import swd.persistence.DAO.UserDAO;
 import swd.persistence.entity.model.User;
+import swd.presentation.DTO.BlogDTO;
+import swd.presentation.DTO.UserDTO;
 
 @Transactional
 @Service
 public class UserServiceImpl implements UserService {
+    @Autowired
+    private ModelMapper modelMapper;
     @Autowired
     private UserDAO userDao;
     public User getUserById(int userId){
@@ -63,5 +68,30 @@ public class UserServiceImpl implements UserService {
         
         // TODO Auto-generated method stub
         return userDao.getByUsername(username);
+    }
+    @Override
+    public UserDTO convertToDTO(User userEnt) {
+        UserDTO userDto = modelMapper.map(userEnt, UserDTO.class);
+        return userDto;
+    }
+    @Override
+    public User convertToEnt(UserDTO userDto) {
+        User  userEnt = modelMapper.map(userDto, User.class); 
+        return userEnt;
+    }
+    @Override
+    public boolean editUserById(int userId, User userEnt) {
+        boolean usernameExist = userDao.usernameExist(userEnt.getUsername());
+        if (!usernameExist){
+            return false;
+        } else {
+            boolean result =  userDao.updateInfo(userEnt); 
+            return result;
+        }
+    }
+    @Override
+    public boolean deactiveUser(int userId) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }

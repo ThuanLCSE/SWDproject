@@ -1,13 +1,13 @@
 package swd.presentation.DTO;
 
 public class ErrorMessageDTO {
-    private int type;
+    private int state;
     private String message;
-    public int getType() {
-        return type;
+    public int getstate() {
+        return state;
     }
-    public void setType(int type) {
-        this.type = type;
+    public void setstate(int state) {
+        this.state = state;
     }
     public String getMessage() {
         return message;
@@ -15,9 +15,9 @@ public class ErrorMessageDTO {
     public void setMessage(String message) {
         this.message = message;
     }
-    public ErrorMessageDTO(int type, String message) {
+    public ErrorMessageDTO(int state, String message) {
         super();
-        this.type = type;
+        this.state = state;
         this.message = message;
     }
     public ErrorMessageDTO() {
@@ -26,7 +26,7 @@ public class ErrorMessageDTO {
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return this.type + " " +this.message;
+        return this.state + " " +this.message;
     }
     
 }

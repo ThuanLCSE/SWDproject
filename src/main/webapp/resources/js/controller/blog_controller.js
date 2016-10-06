@@ -51,9 +51,7 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
 			 
 			BlogService.saveBlog({
                 action: 'create'
-			  },{
-				  blogDto: $scope.blogDto
-			  }
+			  },$scope.blogDto 
 			  , function(response) {
 				  $scope.blogView.url = 'resources/blog/list.html';
 				  $scope.showMyBlog(); 
