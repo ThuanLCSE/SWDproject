@@ -39,7 +39,7 @@ public class AuthController {
         return "login";
 
     }
-    @RequestMapping(value={"/", "/home"}, method = RequestMethod.GET)
+    @RequestMapping(value={"/", "/home"}, method = {RequestMethod.GET, RequestMethod.POST})
     public String homePage(HttpSession session,
             Model model) {
        

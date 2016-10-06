@@ -7,6 +7,10 @@
  <div> Like: {{blogDetail.numberOfLike}} </div>
  <div> Published Day: {{blogDetail.publishedDay| date:"MM/dd/yyyy"}} </div>
  <div> Author : {{blogDetail.authorName}} </div>
-  <button ng-click="commentBlog()">Edit </button>
-   <button ng-click="commentBlog()">Comment</button>
- <button ng-click="commentBlog()">Comment</button>
+ <div ng-show="blogDetail.userID == blogView.currentUserID">
+  <button class="btn btn-primary" ng-click="commentBlog()">Edit </button>
+   <button class="btn btn-primary" ng-click="commentBlog()">Hide this blog</button>
+   </div>
+ <button class="btn btn-primary" ng-click="commentBlog()">Comment</button> 
+ 
+    <button  class="btn  btn-primary"  ng-click="showAllBlog()">Back to list</button>

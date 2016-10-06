@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>My blog</title>
@@ -8,6 +9,7 @@
   <link rel="stylesheet" type="text/css" href="/resources/css/custom.css"></link>
 </head>
 <body ng-app="myApp" >
+<div>Welcome to system <p th:text="${session.fullname}"></p></div>
   <section ng-controller="BlogController" >
   
     <ng-include src="blogView.url"></ng-include>
@@ -18,6 +20,7 @@
          <script src="/resources/js/lib/angular-route.js"></script>
       <script src="/resources/js/app.js"></script>
       <script src="/resources/js/service/blog_service.js"></script>
+      <script src="/resources/js/service/user_service.js"></script>
       <script src="/resources/js/controller/blog_controller.js"></script>
 </body>
 </html> 

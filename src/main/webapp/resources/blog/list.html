@@ -10,8 +10,8 @@
       <td>Comment</td>
       <td>Like</td>
   </tr>
-  <tr ng-click="viewDetailBlog($index)" ng-repeat="blog in blogs | orderBy : 'lastUpdateDay'">
-      <td class="blog-list-img"><img alt="avatar" ng-src="blog.imageUrl"></td>
+  <tr  class="blog-list-row" ng-click="viewDetailBlog($index)" ng-repeat="blog in blogs | orderBy : 'lastUpdateDay'">
+      <td><img  class="blog-list-img" alt="avatar" ng-src="{{blog.imageUrl}}"></td>
       <td>{{blog.title}}</td>
       <td>{{blog.authorName}}</td>
       <td>{{blog.content}}</td>

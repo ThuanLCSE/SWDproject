@@ -2,10 +2,14 @@ angular.module('blog').factory('BlogService',
 	['$resource',
 	 function($resource) {
 	// Use the '$resource' service to return an article '$resource' object
-    return $resource('api/blog/:action/:blogId', 
+    return $resource('api/blog/:action/:blogId/:userId', 
     	null,
     	{
         showAll: {
+            method: 'POST',
+            isArray: true
+        },
+        showMyBlog: {
             method: 'POST',
             isArray: true
         },

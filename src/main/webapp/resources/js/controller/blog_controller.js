@@ -1,6 +1,8 @@
-angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
-    function($scope, BlogService) {
+angular.module('blog').controller('BlogController', ['$scope', 'BlogService','UserService',
+    function($scope, BlogService, UserService) {
 		$scope.blogView = {
+				currentUserID: '',
+				currentUserFullname: '',
 			url: 'resources/blog/list.html'
 		}
 		$scope.blogDto = {
@@ -8,6 +10,15 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
 				content: '',
 				imageUrl: ''
 		};
+		UserService.getAuthInfo({
+            action: 'current'
+	      },null
+	      , function(response) {
+	    	  $scope.blogView.currentUserID = response.userID;
+	    	  $scope.blogView.currentUserFullname = response.fullname; 
+          }, function(errorResponse) {
+          	 console.log(errorResponse);
+          });
 		$scope.showAllBlog = function(){
 			$scope.blogView.url = 'resources/blog/list.html';
 			BlogService.showAll({
@@ -23,7 +34,8 @@ angular.module('blog').controller('BlogController', ['$scope', 'BlogService',
 		$scope.showMyBlog = function(){
 			$scope.blogView.url = 'resources/blog/list.html';
 			BlogService.showMyBlog({
-		                action: 'all'
+		                action: 'all',
+		                userId: $scope.blogView.currentUserID
 	      },null
 	      , function(response) {
 	    	  $scope.blogs = response;

@@ -62,6 +62,15 @@ public class RestAuthController {
         return result;
      
     }
+    @RequestMapping(value="/current",method = RequestMethod.GET)
+    public UserDTO getAuthenticatedInfo(HttpSession session) { 
+        UserDTO currentUser = new UserDTO();
+        currentUser.setUserID(Integer.parseInt(session.getAttribute("userId")+"")); 
+        currentUser.setFullname(session.getAttribute("fullname")+"");
+        currentUser.setRole(session.getAttribute("role")+""); 
+        return currentUser;
+     
+    }
    
     
 }
