@@ -94,4 +94,9 @@ public class UserServiceImpl implements UserService {
         // TODO Auto-generated method stub
         return false;
     }
+	public User getUserByUsername(String username) {
+		User us = userDao.getByUsername(username);
+        return us;
+		// TODO Auto-generated method stub
+	}
 }

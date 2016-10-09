@@ -21,4 +21,5 @@ public interface UserService {
     public boolean signUp(String username, String password, String fullName);
     public UserDTO convertToDTO(User userEnt);
     public User convertToEnt(UserDTO userDto);
+	public User getUserByUsername(String username);
 }
