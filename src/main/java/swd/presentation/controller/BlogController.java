@@ -71,7 +71,9 @@ public class BlogController {
         ModelAndView mv= new ModelAndView();
         List<Publishedblog> blogEnts= blogService.showAllByUserId(us.getUserID());
         List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
-        for (Publishedblog blogEnt: blogEnts){ 
+
+        
+        for (Publishedblog blogEnt: blogEnts){  	
         	BlogDTO blogDTO = blogService.convertToDTO(blogEnt);
             	blogDTOs.add(blogDTO);
         }
