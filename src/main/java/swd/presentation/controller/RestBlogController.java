@@ -29,22 +29,22 @@ public class RestBlogController {
     private BlogService blogService;
     @RequestMapping(value = "/detail/{blogId}", method = RequestMethod.POST)
     public BlogDTO detail(HttpSession session, @PathVariable int blogId) {
-        System.out.println(session.getAttribute("userId"));
+//        System.out.println(session.getAttribute("userId"));
         Publishedblog blogEnt =  blogService.findById(blogId);
         BlogDTO blogDto = blogService.convertToDTO(blogEnt);
         return  blogDto;
     }
     @RequestMapping(value = "/all", method = RequestMethod.POST)
-    public List<BlogDTO> greeting(HttpSession session) {
- 
-             System.out.println(session.getAttribute("userId"));
-             List<Publishedblog> blogEnts= blogService.showAll();
-             List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
-             for (Publishedblog blogEnt: blogEnts){
-                 BlogDTO blogDTO = blogService.convertToDTO(blogEnt);
-                 blogDTOs.add(blogDTO);
-             }  
-            return  blogDTOs;
+    public List<BlogDTO> greeting(HttpSession session, @RequestBody(required = false) String sessionId) {
+//        System.out.println(session.getId()); 
+//         System.out.println(session.getAttribute("userId"));
+         List<Publishedblog> blogEnts= blogService.showAll();
+         List<BlogDTO> blogDTOs  = new ArrayList<BlogDTO>();
+         for (Publishedblog blogEnt: blogEnts){
+             BlogDTO blogDTO = blogService.convertToDTO(blogEnt);
+             blogDTOs.add(blogDTO);
+         }  
+        return  blogDTOs;
  
     }
     @RequestMapping(value = "/all/{userId}", method = RequestMethod.POST)

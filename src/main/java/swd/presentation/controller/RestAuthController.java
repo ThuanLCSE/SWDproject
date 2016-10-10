@@ -27,9 +27,10 @@ public class RestAuthController {
     @Autowired
     private UserService userService;
     @RequestMapping(value="/login",method = RequestMethod.POST)
-    public ErrorMessageDTO authenticated(HttpSession session, HttpServletRequest request) {
-        String username = request.getParameter("username");
-        String password = request.getParameter("password");
+    public ErrorMessageDTO authenticated(HttpSession session, @RequestBody UserDTO guest) {
+        String username = guest.getUsername();
+        String password = guest.getPassword();
+//        System.out.println(guest.getUsername()+ " "+ guest.getPassword());
         ErrorMessageDTO errDto = new ErrorMessageDTO();
         boolean auth = userService.getAuthenticated(username, password);
       
@@ -63,8 +64,9 @@ public class RestAuthController {
      
     }
     @RequestMapping(value="/current",method = RequestMethod.GET)
-    public UserDTO getAuthenticatedInfo(HttpSession session) { 
+    public UserDTO getAuthenticatedInfo(HttpSession session, @RequestBody(required = false)  String accessToken ) { 
         UserDTO currentUser = new UserDTO();
+        System.out.println(accessToken);
         currentUser.setUserID(Integer.parseInt(session.getAttribute("userId")+"")); 
         currentUser.setFullname(session.getAttribute("fullname")+"");
         currentUser.setRole(session.getAttribute("role")+""); 

@@ -18,8 +18,8 @@ public class UserDAO implements UserRepository{
     private EntityManager em;
     
     
-    public User checkLogin(String username, String password) {
-        String jpql = "Select u From User u"
+    public boolean checkLogin(String username, String password) {
+        String jpql = "Select u From User u "
                 + "Where u.username = :username And u.password = :password";
         Query query = em.createQuery(jpql);
         query.setParameter("username", username);
@@ -29,9 +29,9 @@ public class UserDAO implements UserRepository{
         try {
             user = (User) query.getSingleResult();
         } catch (NoResultException e){
-            return null;
+            return false;
         }
-        return user;
+        return true;
     }
 
     public boolean updateInfo(User user) {

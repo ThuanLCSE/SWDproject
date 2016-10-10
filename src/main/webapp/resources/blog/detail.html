@@ -1,16 +1,63 @@
-<div> Id: {{blogDetail.blogID}} </div>
-<div> Title: {{blogDetail.title}} </div>
-<div> Content: {{blogDetail.content}} </div> 
-<div> Image: {{blogDetail.imageUrl}} </div>
-<div> Last UpdateDay: {{blogDetail.lastUpdateDay| date:"MM/dd/yyyy"}}</div>
-<div> Comment: {{blogDetail.numberOfComment}} </div>
- <div> Like: {{blogDetail.numberOfLike}} </div>
- <div> Published Day: {{blogDetail.publishedDay| date:"MM/dd/yyyy"}} </div>
- <div> Author : {{blogDetail.authorName}} </div>
- <div ng-show="blogDetail.userID == blogView.currentUserID">
-  <button class="btn btn-primary" ng-click="commentBlog()">Edit </button>
-   <button class="btn btn-primary" ng-click="commentBlog()">Hide this blog</button>
-   </div>
- <button class="btn btn-primary" ng-click="commentBlog()">Comment</button> 
+
+<button  class="btn  btn-primary"  ng-click="showAllBlog()">Back to list</button>
+
+<div class="col-lg-8">
+
+            <!-- Blog Post -->
+        <!-- Title -->
+        <h1>{{blogDetail.title}}</h1>
+
+        <!-- Author -->
+        <p class="lead">
+            by <a href="#">{{blogDetail.authorName}}</a> update: {{blogDetail.publishedDay| date:"MM/dd/yyyy"}}
+        </p>
+        <hr>
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> Posted on August 24, 2013 at 9:00 PM</p>
+        <hr>
+        <!-- Preview Image -->
+        <img class="img-responsive" ng-src="{{blogDetail.imageUrl}}" alt=""> 
+        <hr>
+
+        <!-- Post Content -->
+        <p class="lead"> {{blogDetail.content}}</p>
+        <hr> 
+        <div> <i class="fa fa-comment" aria-hidden="true"></i>  Comment: {{blogDetail.numberOfComment}} </div>
+         <div> <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like: {{blogDetail.numberOfLike}} </div>
+        <!-- Comments Form -->
+        <div class="well">
+            <h4>Leave a Comment:</h4>
+            <form role="form" ng-submit="commentBlog()">
+                <div class="form-group">
+                    <textarea class="form-control" rows="3"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Done</button>
+            </form>
+        </div>
+
+        <hr>
  
-    <button  class="btn  btn-primary"  ng-click="showAllBlog()">Back to list</button>
+        
+
+        <!-- Comment -->
+        <div class="media">
+            <a class="pull-left" href="#">
+                <img class="media-object" src="http://placehold.it/64x64" alt="">
+            </a>
+            <div class="media-body">
+                <h4 class="media-heading">Start Bootstrap
+                    <small>August 25, 2014 at 9:30 PM</small>
+                </h4>
+                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo
+            </div>
+        </div>
+
+    </div> 
+    <div class="col-lg-4">
+        
+     <div ng-show="blogDetail.userID == blogView.currentUserID">
+      <button class="btn btn-primary" ng-click="editBlog()">Edit </button>
+       <button class="btn btn-primary" ng-click="hideBlog()">Hide this blog</button>
+       </div>
+   </div>  
+   

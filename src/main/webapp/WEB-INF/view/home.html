@@ -4,29 +4,62 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
 <title>My blog</title>
+<link rel="stylesheet" type="text/css" href="/resources/css/font-awesome/css/font-awesome.min.css"></link>
+       
+        <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css"></link>
+        <link rel="stylesheet" type="text/css" href="/resources/css/custom.css"></link>
 </head>
 <body>
-	<h2>Welcome to system <p th:text="${session.fullname}"></p></h2>
-  <p th:text="${session.userId}"></p>
-    <p th:text="${session.role}"></p>
-	<form action="/blogApp" method="get">
-		<input type="submit" value="View all Blogs" />
-	</form>
-
-	<form action="/listBlog" method="get">
-		<input type="hidden" name="id" value="${sessionScope.userId}" /> <input
-			type="submit" value="View my blogs" />
-	</form>
-
-	<form action="/profile" method="get">
-		<input type="hidden" name="id" value="${sessionScope.userId}" /> <input
-			type="submit" value="View my profile" />
-	</form>
-
-	<form th:action="@{/logout}" method="POST">
-         <input type="submit" value="Log out"/>
-    </form>
-    
+	 
+ 	<h2>Welcome to system <span class="label label-primary" th:text="${session.fullname}"></span></h2>
+ 
+    <div class="navbar navbar-fixed-left">
+      <h2 class="text-white">Feature</h2>
+      <ul class="nav navbar-nav">
+        <li class="li-search-nav">
+            <div class="input-group">
+              <h2 class="text-white">Search blog</h2>
+                <input type="text" class="form-control"/>
+                <span class="input-group-btn">
+                 <button class="btn btn-theme-inverse" type="button">
+                 <i class="fa fa-search fa-fw" aria-hidden="true"></i></button>
+                </span>
+            </div>
+        </li>
+        <li class="li-nav" >
+           
+              <form action="/blogApp" method="get">
+                <i class="fa fa-calendar  fa-fw" aria-hidden="true"></i>
+                <input type="submit" class="btn btn-default" value="View all Blogs" />
+            </form>  
+        </li>
+        <li class="li-nav">
+            
+             <form action="/listBlog" method="get">
+              <i class="fa fa-calendar-minus-o fa-fw" aria-hidden="true"></i>
+                <input type="hidden" name="id" value="${sessionScope.userId}" />
+             <input class="btn btn-default"
+                    type="submit" value="View my blogs" />
+            </form> 
+        </li>
+        <li class="li-nav" >
+            
+             <form action="/profile" method="get">
+              <i class="fa fa-user fa-fw" aria-hidden="true"></i>
+                <input type="hidden" name="id" value="${sessionScope.userId}" /> 
+                <input class="btn btn-default"
+                    type="submit" value="View my profile" />
+            </form>
+             </li>
+        <li class="li-nav"> 
+            <form th:action="@{/logout}" method="POST">
+            <i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
+                 <input type="submit" class="btn btn-default" value="Log out"/>
+            </form>
+        </li> 
+      </ul>
+    </div> 
+ 
 
 
 </body>

@@ -6,7 +6,7 @@ import java.util.List;
 import swd.persistence.entity.model.User;
 
 public interface UserRepository {
-    public User checkLogin(String username, String password);
+    public boolean checkLogin(String username, String password);
 
     public boolean updateInfo(User user);
     public boolean usernameExist(String username);

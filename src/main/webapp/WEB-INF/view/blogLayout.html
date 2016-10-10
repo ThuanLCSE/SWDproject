@@ -2,17 +2,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+ 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+    <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+    <meta name="description" content=""></meta>
+    <meta name="author" content=""></meta>
+    <meta http-equiv="Content-Type" ></meta>
 <title>My blog</title>
-<link rel="stylesheet" type="text/css" href="/resources/css/font-awesome.min.css"></link>
- <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css"></link>
+<link rel="stylesheet" type="text/css" href="/resources/css/font-awesome/css/font-awesome.min.css"></link>
+    <link rel="stylesheet" type="text/css" href="/resources/css/bootstrap.min.css"></link>
   <link rel="stylesheet" type="text/css" href="/resources/css/custom.css"></link>
 </head>
 <body ng-app="myApp" >
-<div>Welcome to system <p th:text="${session.fullname}"></p></div>
-  <section ng-controller="BlogController" >
-  
-    <ng-include src="blogView.url"></ng-include>
+<h2 style="text-align: right;">Welcome to system <span class="label label-primary" th:text="${session.fullname}"></span></h2>
+ 
+  <section  class="container" ng-controller="BlogController" >
+    
+        <!-- Page Heading -->
+        <div class="row">
+            <ng-include src="blogView.url"></ng-include>
+        </div>
    </section> 
     <a href="/home">Back to home</a>
         <script src="/resources/js/lib/angular.min.js"></script>
