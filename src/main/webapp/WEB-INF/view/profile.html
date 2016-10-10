@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+<title>My Profile</title>
+</head>
+<body>
+         
+   <form th:action="@{/viewProfile}" method="post">
+    
+    <table border="1">
+        <tr>
+       
+       
+            <th>Full Name</th>
+            <th>Picture</th>
+            <th>role</th>
+            <th>Create Day</th>
+            <th>Total Blog</th>
+        </tr>
+        <tr>
+          <td th:text="${userDto.fullname}"></td>
+          <td th:text="${userDto.profilePictureUrl}"></td>
+          <td th:text="${userDto.role}"></td>
+          <td th:text="${userDto.createDay}"></td>
+      	  <td th:text="${userDto.totalBlog}"></td>
+      	
+  
+          <td ></td>
+	    </tr>
+    </table>
+    </form>
+    <a href="/home">Back to home</a>
+    <a href="/editProfile">Edit Profile</a>
+     
+</body>
+</html>
+

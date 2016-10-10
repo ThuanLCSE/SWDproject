@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <title>Edit Profile</title>
+  </head>
+
+  <body>
+     <form th:action="@{/editProfile}" method="post">
+            <div><label> Full name : <input type="text" name="fullname"/> </label></div>
+            <div><label> URL picture: <input type="text" name="picture"/> </label></div>   
+            
+            <div><input type="submit" value="Save"/></div>
+        </form>
+        <a href="/profile">Back</a>
+  </body>
+</html>

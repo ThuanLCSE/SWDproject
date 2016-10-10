@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+  <head>
+    <title>Create blog</title>
+  </head>
+
+  <body>
+     <form th:action="@{/CreateBlog}" method="post">
+            <div><label> Title : <input type="text" name="title"/> </label></div>
+            <div><label> URL picture: <input type="text" name="picture"/> </label></div>   
+            <div><label> Content: <input type="text" name="content"/> </label></div>
+            <div><input type="submit" value="Sign In"/></div>
+        </form>
+        <a href="/listBlog">Back</a>
+  </body>
+</html>
