@@ -7,19 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import swd.business.service.UserService;
-import swd.persistence.DAO.UserDAO;
-import swd.persistence.entity.model.Category;
-import swd.persistence.entity.model.Publishedblog;
+
 import swd.persistence.entity.model.User;
-import swd.presentation.DTO.BlogDTO;
-import swd.presentation.DTO.CategoryDTO;
+
 import swd.presentation.DTO.UserDTO;
 
 @Controller
@@ -51,5 +48,18 @@ public class UserController {
     }
     
     // Edit profile
-    
+    @RequestMapping(value ="/editProfile", method = RequestMethod.GET)
+    public String createBlogg(){ 
+        return "editProfile";
+    }
+    @RequestMapping(value={"/editProfile"}, method = RequestMethod.POST)
+    public String createBlog(Model model, @RequestParam String fullname, @RequestParam String picture){
+    	org.springframework.security.core.userdetails.User user = (org.springframework.security.core.userdetails.User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    	String username = user.getUsername();  
+        User us = userService.getAuthorized(username);  
+    	us.setFullname(fullname);
+    	us.setProfilePictureUrl(picture);
+    	userService.editUserById(us.getUserID(), us);
+    	return "redirect:/profile/";
+    }
 }
