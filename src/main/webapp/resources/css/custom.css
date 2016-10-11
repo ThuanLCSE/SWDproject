@@ -52,3 +52,6 @@
 .text-function:hover{
   text-decoration: underline;
 }
+.error{
+  color: red;
+}

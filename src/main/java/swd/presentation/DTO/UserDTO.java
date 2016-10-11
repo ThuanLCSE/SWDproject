@@ -88,5 +88,10 @@ public class UserDTO {
     }
 
     private String username;
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return userID+ " "+ username+ " " + fullname+ " " +totalBlog;
+    }
 
 }

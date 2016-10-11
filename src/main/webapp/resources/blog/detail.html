@@ -22,16 +22,19 @@
         <!-- Post Content -->
         <p class="lead"> {{blogDetail.content}}</p>
         <hr> 
-        <div> <i class="fa fa-comment" aria-hidden="true"></i>  Comment: {{blogDetail.numberOfComment}} </div>
-         <div> <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like: {{blogDetail.numberOfLike}} </div>
+        <div> 
+            <i class="fa fa-comment" aria-hidden="true"></i>  Comment: {{blogDetail.numberOfComment}}
+           <i class="fa fa-thumbs-up" aria-hidden="true"></i> Like: {{blogDetail.numberOfLike}} 
+       </div>
         <!-- Comments Form -->
         <div class="well">
+        <button type="button" ng-click="likeBlog()" class="btn btn-primary">Like</button>
             <h4>Leave a Comment:</h4>
             <form role="form" ng-submit="commentBlog()">
                 <div class="form-group">
-                    <textarea class="form-control" rows="3"></textarea>
+                    <textarea ng-model="commentDto.content" class="form-control" rows="3"></textarea>
                 </div>
-                <button type="submit" class="btn btn-primary">Done</button>
+                <button type="button" ng-click="commentBlog()" class="btn btn-primary">Done</button>
             </form>
         </div>
 
@@ -40,15 +43,15 @@
         
 
         <!-- Comment -->
-        <div class="media">
+        <div ng-repeat="comment in commentList " class="media">
             <a class="pull-left" href="#">
-                <img class="media-object" src="http://placehold.it/64x64" alt="">
+                <img class="media-object" src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/boy-128.png" alt=""> 
             </a>
-            <div class="media-body">
-                <h4 class="media-heading">Start Bootstrap
-                    <small>August 25, 2014 at 9:30 PM</small>
+            <div class="media-body">   {{comment.authorName}}
+                <h4 class="media-heading">
+                    <small>{{comment.commentTime| date:"MM/dd/yyyy"}}</small>
                 </h4>
-                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo
+               {{comment.content}}
             </div>
         </div>
 
@@ -57,7 +60,9 @@
         
      <div ng-show="blogDetail.userID == blogView.currentUserID">
       <button class="btn btn-primary" ng-click="editBlog()">Edit </button>
-       <button class="btn btn-primary" ng-click="hideBlog()">Hide this blog</button>
+      
+       <button ng-show=".blogView.listType == 'publish'" class="btn btn-primary" ng-click="hideBlog()">Hide this blog</button>
+       <button ng-show=".blogView.listType == 'draft'" class="btn btn-primary" ng-click="publishBlog()">Publish this blog</button>
        </div>
    </div>  
    

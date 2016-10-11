@@ -14,11 +14,14 @@
                 <h3>{{blog.title}}</h3>
                 <h4>{{blog.authorName}}  - Update: {{blog.lastUpdateDay| date:"MM/dd/yyyy"}}</h4>
                 <p>{{blog.content}}</p>
-                <i class="fa fa-comment" aria-hidden="true"></i> {{blog.numberOfComment}} </br>
-                <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{blog.numberOfLike}}
-                <a class="btn btn-primary" ng-click="viewDetailBlog($index)"  href="#">View Blog <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <i class="fa fa-comment" aria-hidden="true"></i> {{blog.numberOfComment}}
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i> {{blog.numberOfLike}} </br>
+                <button class="btn btn-primary" ng-click="viewDetailBlog(blog.blogID)" href="#">View Blog 
+                 <i class="fa fa-book fa-fw" aria-hidden="true"></i>
+                </button>
             </div>
         </div>
 <button ng-click="createBlog()" type="button" class="btn btn-primary" >Create new Blog</button>
-<button ng-click="showMyBlog()" type="button" class="btn btn-primary" >View my Blog</button>
+<button ng-click="showMyBlog()" type="button" class="btn btn-primary" >View my Blog</button> 
+<button ng-click="showMyDraft()" type="button" class="btn btn-primary" >View my Draft</button>
 </div>

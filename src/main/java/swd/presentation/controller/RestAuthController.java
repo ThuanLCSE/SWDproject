@@ -63,13 +63,12 @@ public class RestAuthController {
         return result;
      
     }
-    @RequestMapping(value="/current",method = RequestMethod.GET)
+    @RequestMapping(value="/current",method = RequestMethod.POST)
     public UserDTO getAuthenticatedInfo(HttpSession session, @RequestBody(required = false)  String accessToken ) { 
-        UserDTO currentUser = new UserDTO();
-        System.out.println(accessToken);
-        currentUser.setUserID(Integer.parseInt(session.getAttribute("userId")+"")); 
-        currentUser.setFullname(session.getAttribute("fullname")+"");
-        currentUser.setRole(session.getAttribute("role")+""); 
+        UserDTO currentUser = new UserDTO(); 
+        User userEnt = userService.getUserById(Integer.parseInt(session.getAttribute("userId")+""));
+        currentUser = userService.convertToDTO(userEnt); 
+        System.out.println(currentUser.toString());
         return currentUser;
      
     }

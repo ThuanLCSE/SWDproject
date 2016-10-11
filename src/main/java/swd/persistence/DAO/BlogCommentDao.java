@@ -1,12 +1,16 @@
 package swd.persistence.DAO;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import swd.persistence.entity.model.Blogcomment;
+import swd.persistence.entity.model.Publishedblog;
 
 
 @Repository
@@ -16,20 +20,16 @@ public class BlogCommentDao implements BlogCommentRepository{
 	@PersistenceContext
     private EntityManager em;
 	@Override
-	public boolean create(Blogcomment blogComment) {
-		Blogcomment blc = em.find(Blogcomment.class, blogComment.getId());
-		if (blc==null) {
+	public boolean create(Blogcomment blogComment) { 
 			em.persist(blogComment);
-		}
-		// TODO Auto-generated method stub
-		return false;
+			return true; 
 	}
 
 	@Override
-	public boolean delete(Blogcomment blogComment) {
-		Blogcomment blc = em.find(Blogcomment.class, blogComment.getId());
+	public boolean delete(int commentId) {
+		Blogcomment blc = em.find(Blogcomment.class, commentId);
         if (blc != null){
-            em.remove(blogComment);
+            em.remove(blc);
             return true;
             }
 		// TODO Auto-generated method stub
@@ -45,5 +45,16 @@ public class BlogCommentDao implements BlogCommentRepository{
         return false;
 		// TODO Auto-generated method stub
 	}
+
+    @Override
+    public List<Blogcomment> getCommentByBlogId(int blogId) {
+        
+        String jpql = "Select c From Blogcomment c "
+                + "Where c.blogID = :blogId";
+        Query query = em.createQuery(jpql);
+        query.setParameter("blogId", blogId); 
+        List<Blogcomment> result = query.getResultList();
+        return result;
+    }
 
 }

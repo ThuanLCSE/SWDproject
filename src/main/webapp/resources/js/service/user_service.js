@@ -5,7 +5,7 @@ angular.module('blog').factory('UserService',
         null,
         { 
         getAuthInfo:{
-            method:'GET' 
+            method:'POST' 
         }
     });
 }]);

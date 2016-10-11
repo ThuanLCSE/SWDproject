@@ -1,5 +1,6 @@
 package swd.business.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,12 +27,13 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public List<Publishedblog> showAll() {
         List<Publishedblog> blogs = blogDao.getAll();
+        List<Publishedblog> result = new ArrayList<Publishedblog>();
         for (int i=0;i<blogs.size();i++){
-            if (blogs.get(i).getPublished() == 0){
-                blogs.remove(i);
+            if (blogs.get(i).getPublished() == 1){
+                result.add(blogs.get(i));
             }
         }
-        return blogs;
+        return result;
     }
 
     @Override
@@ -49,8 +51,10 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public boolean publishBlogById(int blogId) {
-        // TODO Auto-generated method stub
-        return false;
+        Publishedblog current = blogDao.getById(blogId); 
+        current.setPublished((byte)1);
+        boolean result=  blogDao.edit(blogId, current); 
+        return result; 
     }
 
 
@@ -86,8 +90,7 @@ public class BlogServiceImpl implements BlogService{
 
     @Override
     public  BlogDTO convertToDTO(Publishedblog blogEnt) { 
-        BlogDTO blogDto = modelMapper.map(blogEnt, BlogDTO.class);
-        System.out.println(blogDto);
+        BlogDTO blogDto = modelMapper.map(blogEnt, BlogDTO.class); 
         return blogDto;
     }
 
@@ -122,8 +125,11 @@ public class BlogServiceImpl implements BlogService{
 
 	@Override
 	public boolean editBlog(Publishedblog blog) {
-		boolean result=  blogDao.edit(blog.getBlogID(), blog);
-	    
+	    Publishedblog current = blogDao.getById(blog.getBlogID());
+	    current.setTitle(blog.getTitle());
+	    current.setContent(blog.getContent());
+	    current.setImageUrl(blog.getImageUrl()); 
+		boolean result=  blogDao.edit(blog.getBlogID(), current); 
 		return result;
 	}
 
@@ -142,13 +148,34 @@ public class BlogServiceImpl implements BlogService{
     @Override
     public List<Publishedblog> showAllByUserId(int userId) {
         List<Publishedblog> temp =blogDao.getAll();
-        for (int i=0;i<temp.size();i++){
-            if (temp.get(i).getUserID() != userId){
-                temp.remove(i);
+        List<Publishedblog> result = new ArrayList<Publishedblog>();
+        for (int i=0;i<temp.size();i++ ){
+            if (temp.get(i).getUserID() == userId  && temp.get(i).getPublished() == 1){
+                result.add(temp.get(i));
             }
         }
-        return temp;
+        return result;
         
+    }
+
+    @Override
+    public boolean unpublishBlogById(int blogId) {
+        Publishedblog current = blogDao.getById(blogId); 
+        current.setPublished((byte)0);
+        boolean result=  blogDao.edit(blogId, current); 
+        return result; 
+    }
+
+    @Override
+    public List<Publishedblog> showAllDraftByUserId(int userId) {
+        List<Publishedblog> temp =blogDao.getAll();
+        List<Publishedblog> result = new ArrayList<Publishedblog>();
+        for (int i=0;i<temp.size();i++){
+            if (temp.get(i).getUserID() == userId && temp.get(i).getPublished() == 0){
+                result.add(temp.get(i));
+            }
+        }
+        return result; 
     }
 
 	

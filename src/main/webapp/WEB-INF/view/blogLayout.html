@@ -15,7 +15,10 @@
 </head>
 <body ng-app="myApp" >
 <h2 style="text-align: right;">Welcome to system <span class="label label-primary" th:text="${session.fullname}"></span></h2>
- 
+   <a class="btn btn-danger" href="/home">
+     <i class="fa fa-chevron-left" aria-hidden="true"></i>
+      Back to home
+    </a>
   <section  class="container" ng-controller="BlogController" >
     
         <!-- Page Heading -->
@@ -23,13 +26,16 @@
             <ng-include src="blogView.url"></ng-include>
         </div>
    </section> 
-    <a href="/home">Back to home</a>
+  
         <script src="/resources/js/lib/angular.min.js"></script>
          <script src="/resources/js/lib/angular-resource.js"></script>
          <script src="/resources/js/lib/angular-route.js"></script>
       <script src="/resources/js/app.js"></script>
       <script src="/resources/js/service/blog_service.js"></script>
       <script src="/resources/js/service/user_service.js"></script>
+            <script src="/resources/js/service/like_service.js"></script>
+            
+            <script src="/resources/js/service/comment_service.js"></script>
       <script src="/resources/js/controller/blog_controller.js"></script>
 </body>
 </html> 

@@ -9,7 +9,10 @@ angular.module('blog').factory('BlogService',
             method: 'POST',
             isArray: true
         },
-        showMyBlog: {
+        showMyDraft: {
+            method: 'POST',
+            isArray: true
+        }, showMyBlog: {
             method: 'POST',
             isArray: true
         },
@@ -25,6 +28,12 @@ angular.module('blog').factory('BlogService',
         },
         saveDraftBlog:{
             method:'POST' 
-        }
+        },
+        updateBlog:{
+        	 method:'POST' 
+        },
+        hideBlog:{
+        	method:'POST' 
+       }
     });
 }]);
